@@ -5,13 +5,15 @@ import { ArrowLeft, Check } from "lucide-react";
 import { Link } from "wouter";
 import { useEffect, useState } from "react";
 import SiteShell, { useLanguage } from "@/components/SiteShell";
+import { withSiteName } from "@/const";
 
 export default function CookiePage() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
   const [analytics, setAnalytics] = useState(false);
   const [preferences, setPreferences] = useState(true);
   const [saved, setSaved] = useState(false);
   useEffect(() => { setAnalytics(localStorage.getItem("msd-analytics") === "true"); }, []);
+  useEffect(() => { document.title = withSiteName(t.cookies.title, lang); }, [t, lang]);
   const persist = (analyticsValue = analytics, preferencesValue = preferences) => {
     localStorage.setItem("msd-analytics", String(analyticsValue));
     localStorage.setItem("msd-preferences", String(preferencesValue));

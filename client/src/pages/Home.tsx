@@ -5,6 +5,7 @@ import { ArrowDownRight, Check, Plus } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import SiteShell, { useLanguage } from "@/components/SiteShell";
 import { copy, type Lang } from "@/lib/site-content";
+import { SITE_NAME } from "@/const";
 
 const images = {
   hero: "/assets/lingkar-kota-hero-art.jpg",
@@ -18,7 +19,7 @@ export default function Home() {
   const { lang, t } = useLanguage();
   const [saved, setSaved] = useState<string[]>([]);
   useEffect(() => { setSaved(JSON.parse(localStorage.getItem("msd-itinerary") || "[]")); }, []);
-  useEffect(() => { document.title = lang === "id" ? "Monumen Selamat Datang — Panduan Independen" : "Monumen Selamat Datang — Independent Guide"; }, [lang]);
+  useEffect(() => { document.title = `${SITE_NAME[lang]} — ${lang === "id" ? "Sejarah, Lokasi & Foto" : "History, Location & Photos"}`; }, [lang]);
   const schema = useMemo(() => structuredData(lang), [lang]);
   const toggleItem = (id: string) => setSaved((prev) => { const next = prev.includes(id) ? prev.filter((value) => value !== id) : [...prev, id]; localStorage.setItem("msd-itinerary", JSON.stringify(next)); return next; });
   const savedLabels = t.itinerary.filter(([id]) => saved.includes(id)).map(([, label]) => label);
@@ -49,7 +50,7 @@ function Detail({ title, text }: { title: string; text: string }) { return <arti
 function structuredData(lang: Lang) {
   const t = copy[lang];
   return {
-    attraction: { "@context": "https://schema.org", "@type": "TouristAttraction", name: "Monumen Selamat Datang", alternateName: "Bundaran HI", description: t.heroLead, address: { "@type": "PostalAddress", streetAddress: "Bundaran Hotel Indonesia, Menteng", addressLocality: "Kota Jakarta Pusat", addressRegion: "Daerah Khusus Ibukota Jakarta", postalCode: "10310", addressCountry: "ID" }, geo: { "@type": "GeoCoordinates", latitude: -6.195005093792665, longitude: 106.82046897695771 }, isAccessibleForFree: true, publicAccess: true, sameAs: "https://maps.app.goo.gl/woG2tFVduxw75efG8" },
+    attraction: { "@context": "https://schema.org", "@type": "TouristAttraction", name: "Monumen Selamat Datang", alternateName: "Bundaran HI", url: "https://monumenhi.com/", description: t.heroLead, image: "https://monumenhi.com/assets/bundaran-hi-adisurahman.jpg", address: { "@type": "PostalAddress", streetAddress: "Bundaran Hotel Indonesia, Menteng", addressLocality: "Kota Jakarta Pusat", addressRegion: "Daerah Khusus Ibukota Jakarta", postalCode: "10310", addressCountry: "ID" }, geo: { "@type": "GeoCoordinates", latitude: -6.195005093792665, longitude: 106.82046897695771 }, isAccessibleForFree: true, publicAccess: true, touristType: ["Photography", "Sightseeing", "Commuter"], sameAs: "https://maps.app.goo.gl/woG2tFVduxw75efG8" },
     faq: { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: t.faqs.map(([name, text]) => ({ "@type": "Question", name, acceptedAnswer: { "@type": "Answer", text } })) }
   };
 }

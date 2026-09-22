@@ -3,13 +3,16 @@
  */
 import { ArrowLeft } from "lucide-react";
 import { Link, useLocation } from "wouter";
+import { useEffect } from "react";
 import SiteShell, { useLanguage } from "@/components/SiteShell";
+import { withSiteName } from "@/const";
 
 type PageType = "privacy" | "terms";
 
 export default function InfoPage({ type }: { type: PageType }) {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
   const page = t[type];
+  useEffect(() => { document.title = withSiteName(page.title, lang); }, [page, lang]);
   return <SiteShell compact>
     <main className="policy-page">
       <div className="policy-rail" aria-hidden="true"><span>JKT · 06°11′S</span></div>
