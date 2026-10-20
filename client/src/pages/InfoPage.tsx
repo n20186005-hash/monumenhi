@@ -2,22 +2,21 @@
  * Lingkar Kota design system: restrained legal-information page with paper ground and orbit rule.
  */
 import { ArrowLeft } from "lucide-react";
-import { Link, useLocation } from "wouter";
-import { useEffect } from "react";
+
+
 import SiteShell, { useLanguage } from "@/components/SiteShell";
-import { withSiteName } from "@/const";
+import { languagePath } from "@/const";
 
 type PageType = "privacy" | "terms";
 
 export default function InfoPage({ type }: { type: PageType }) {
   const { lang, t } = useLanguage();
   const page = t[type];
-  useEffect(() => { document.title = withSiteName(page.title, lang); }, [page, lang]);
-  return <SiteShell compact>
+  return <SiteShell compact page={type}>
     <main className="policy-page">
       <div className="policy-rail" aria-hidden="true"><span>JKT · 06°11′S</span></div>
       <article className="policy-content">
-        <Link href="/" className="back-link"><ArrowLeft size={16} /> {type === "privacy" ? "MONUMEN" : "MONUMEN"}</Link>
+        <a href={languagePath(lang)} className="back-link"><ArrowLeft size={16} /> {type === "privacy" ? "MONUMEN" : "MONUMEN"}</a>
         <p className="eyebrow orange">{page.eyebrow}</p>
         <h1>{page.title}</h1>
         <p className="policy-date">{page.updated}</p>

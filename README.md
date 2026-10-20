@@ -1,28 +1,17 @@
-# Monumen Selamat Datang — delivery notes
+# Monumen Selamat Datang / Bundaran HI guide
 
-This package contains an independent, non-profit public-information site about Monumen Selamat Datang (Bundaran HI), Jakarta Pusat. Indonesian is the default language and English is available from the language control in the header.
+Independent Indonesian and English visitor information. React/Vite builds eight directly readable static pages: one guide and three policy pages per language, with matching language links, unique text metadata, canonical URLs, sitemap and separate noindex404.
 
-## Included experience
+```sh
+corepack pnpm install --frozen-lockfile
+pnpm check
+pnpm build
+```
 
-The site contains landmark context, practical arrival guidance, neutral information about nearby needs, an embedded Indonesian-language Google Map, FAQ content, locally stored field-list functionality, standalone privacy/terms/cookie pages, and JSON-LD for `TouristAttraction` and `FAQPage`.
+`server/worker.ts` runs before ASSETS on the verified `monumenhi` Cloudflare Worker. HTTP/www requests redirect to HTTPS apex with the path and query preserved. Unknown URLs retain status404 and a noindex header. `dist/public` is the asset output; `dist/index.js` is only an optional local Express server. Production deployment and CUA browser acceptance remain separate coordinator steps.
 
-Google Analytics 4 is configured with measurement ID `G-HXM22WWPKP`. It is not requested until a visitor explicitly enables analytics in the Cookie Settings page. The visitor’s language, cookie preferences, and field-list items remain in browser `localStorage` on the current device.
+Language follows the URL. Consent storage is guarded and Google Analytics loads only after explicit opt-in. Withdrawal reloads an active analytics page. Persistent field lists require optional preferences; otherwise lists are temporary. Malformed or unavailable storage is handled without crashing, and failed saves are reported. There are no accounts, booking systems, contact forms or email submission channels. Google Maps and Google Fonts are disclosed third-party resources.
 
-## Quality checks run
+See [public evidence](PUBLIC_SOURCES.md) and [asset provenance](ASSET_SOURCES.md). Traffic-island access, nearby services, transport entrances, viewing decks, fees and events require separate confirmation. Original decorative working assets are archived outside public output; no photographic authenticity or new licence is inferred for them.
 
-`pnpm check` and `pnpm build` pass from the project root. The production output was scanned for `example.com` and `chrome-extension://`; neither is present. A `localhost` fragment remains inside a bundled development-environment guard supplied by the runtime dependency, rather than in a public URL or site setting.
-
-## Image credits
-
-The page uses two genuine photos from Wikimedia Commons, retained under **CC BY-SA 4.0**. The photo credits and source links appear in the page’s source notes.
-
-| Photo | Credit | Licence | Source |
-| --- | --- | --- | --- |
-| Jakarta Bundaran HI | Adisurahman | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Jakarta_Bundaran_HI_.jpg |
-| Bundaran HI per August 2023 | Baqotun0023 | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Bundaran_HI_per_August_2023.jpg |
-
-## Suggested domains
-
-These are naming candidates that follow local Indonesian convention and should be checked with a registrar immediately before purchase: `monumenselamatdatang.id`, `panduanbundaranhi.id`, `bundaranhi.info`, and `jakartaputaran.id`.
-
-An RDAP query returned an existing record for `panduanbundaranhi.id`; do not register it without checking a registrar for transfer/status information. Other RDAP lookups timed out from the build environment, so their availability could not be confirmed conclusively.
+Build output is ignored by default. Explicitly include complete generated output when committing a deployment snapshot and verify new hashes, sitemap, robots and 404 in the committed tree.

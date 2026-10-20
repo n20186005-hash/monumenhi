@@ -1,17 +1,3 @@
-export { COOKIE_NAME, ONE_YEAR_MS, SITE_NAME, withSiteName } from "@shared/const";
-
-// Generate login URL at runtime so redirect URI reflects the current origin.
-export const getLoginUrl = () => {
-  const oauthPortalUrl = import.meta.env.VITE_OAUTH_PORTAL_URL;
-  const appId = import.meta.env.VITE_APP_ID;
-  const redirectUri = `${window.location.origin}/api/oauth/callback`;
-  const state = btoa(redirectUri);
-
-  const url = new URL(`${oauthPortalUrl}/app-auth`);
-  url.searchParams.set("appId", appId);
-  url.searchParams.set("redirectUri", redirectUri);
-  url.searchParams.set("state", state);
-  url.searchParams.set("type", "signIn");
-
-  return url.toString();
-};
+export const SITE_NAME={id:"Monumen Selamat Datang Jakarta — Panduan Wisata",en:"Selamat Datang Monument Jakarta — Visitor Guide"} as const;
+export const withSiteName=(title:string,lang:"id"|"en")=>`${title} | ${SITE_NAME[lang]}`;
+export const languagePath=(lang:"id"|"en",page="")=>`${lang==="en"?"/en":""}/${page}${page?"/":""}`;
