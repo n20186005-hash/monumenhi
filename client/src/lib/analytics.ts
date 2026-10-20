@@ -1,30 +1,8 @@
-/** Lingkar Kota privacy rule: analytics is loaded only after explicit local consent. */
-const GA_ID = "G-HXM22WWPKP";
-
-declare global {
-  interface Window {
-    dataLayer?: unknown[];
-    gtag?: (...args: unknown[]) => void;
-  }
-}
-
-export function applyAnalyticsConsent(enabled: boolean) {
-  if (!enabled) {
-    window.gtag?.("consent", "update", { analytics_storage: "denied" });
-    return;
-  }
-  if (window.gtag) {
-    window.gtag("consent", "update", { analytics_storage: "granted" });
-    return;
-  }
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = (...args: unknown[]) => window.dataLayer?.push(args);
-  window.gtag("consent", "default", { analytics_storage: "granted" });
-  window.gtag("js", new Date());
-  window.gtag("config", GA_ID, { anonymize_ip: true });
-  const script = document.createElement("script");
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
-  script.dataset.msdAnalytics = "true";
-  document.head.appendChild(script);
-}
+const GA_ID="G-HXM22WWPKP";
+export type Consent={analytics:boolean;preferences:boolean};
+export function readConsent():Consent{try{const v=JSON.parse(localStorage.getItem("msd-consent")||"{}");return{analytics:v?.analytics===true,preferences:v?.preferences===true}}catch{return{analytics:false,preferences:false}}}
+export function saveConsent(value:Consent){try{localStorage.setItem("msd-consent",JSON.stringify({...value,updated:"2026-10-19"}));if(!value.preferences){try{localStorage.removeItem("msd-itinerary")}catch{}}window.dispatchEvent(new Event("msd-analytics-change"));return true}catch{return false}}
+export function readItinerary(){try{if(!readConsent().preferences)return[];const v=JSON.parse(localStorage.getItem("msd-itinerary")||"[]");return Array.isArray(v)?v.filter((id):id is string=>typeof id==="string"):[]}catch{return[]}}
+export function saveItinerary(value:string[]){try{if(!readConsent().preferences)return"temporary";localStorage.setItem("msd-itinerary",JSON.stringify(value));return"saved"}catch{return"failed"}}
+declare global{interface Window{dataLayer?:unknown[];gtag?:(...args:unknown[])=>void}}
+export function applyAnalyticsConsent(enabled:boolean){if(!enabled){if(document.querySelector('script[data-msd-analytics]')){window.gtag?.("consent","update",{analytics_storage:"denied"});window.location.reload()}return}if(document.querySelector('script[data-msd-analytics]'))return;window.dataLayer=window.dataLayer||[];window.gtag=(...args:unknown[])=>window.dataLayer?.push(args);window.gtag("js",new Date());window.gtag("config",GA_ID,{anonymize_ip:true});const script=document.createElement("script");script.async=true;script.src=`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;script.dataset.msdAnalytics="true";document.head.appendChild(script)}

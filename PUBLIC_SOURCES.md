@@ -1,0 +1,12 @@
+# Public sources and scope
+
+Checked 19 October 2026. This is an independent visitor guide, not a transport or monument operator.
+
+- [National Gallery of Indonesia — Selamat Datang Monument](https://gni.kemenbud.go.id/pameran-virtual/poros/karya/monumen-selamat-datang): bronze work dated 1962 for the fourth Asian Games; sketch/design Henk Ngantung, sculpture Edhi Sunarso and Pematung Keluarga Arca Yogyakarta team; location Bundaran Hotel Indonesia, Central Jakarta. No unsupported exact inauguration day or dimensions are added.
+- [Jakarta government — landmarks](https://www.jakarta.go.id/index.php/landmark-jakarta): Bundaran HI/Hotel Indonesia location and Asian Games context. Viewing-deck references are not treated as current access or price guarantees.
+- [MRT Jakarta official release, 24 October 2025](https://jakartamrt.co.id/sites/default/files/2025-10/%5BSIARAN%20PERS%5D%20MRT%20Jakarta%20dan%20Yup%20Kerjasama%20Hadirkan%20Layanan%20Pembayaran%20di%20Aplikasi%20MyMRTJ.pdf): uses the station name Bundaran HI Bank Jakarta. Used only for naming, not payment promotion or fares.
+- [Jakarta government reporting MRT, 12 June 2026](https://m.beritajakarta.id/read/153334/mrt-lakukan-penyesuaian-akses-pintu-masuk-stasiun-bundaran-hi-dan-dukuh-atas): also uses Bundaran HI Bank Jakarta and documents a dated access adjustment. Not a claim that an entrance remains closed or all entrances are open now. Ask the operator about current access.
+- [Transjakarta official material](https://transjakarta.co.id/berita/transjakarta-hadirkan-shuttle-hbkb-ancol-untuk-permudah-akses-masyarakat-menuju-kawasan-wisata): identifies Bundaran HI Astra among stops. Used only for stop naming, not as a fixed current shuttle/CFD schedule or viewing-deck permission.
+- [Google Maps place](https://maps.app.goo.gl/woG2tFVduxw75efG8): dated snapshot 4.7/5 from 8,655 third-party reviews; pin -6.1950051, 106.8230439. No hours, telephone or operator website were displayed. The listing's street-address field is not used as a visitor entrance or pedestrian route.
+
+The sculpture, traffic island, pool, pavement, transport station and viewing deck are distinct access contexts. No 24-hour, free-admission, statue-base entry, fixed car-free-day programme or open-entrance promise is made. Nearby venues and services are candidates requiring their own address/access/price check; retained legacy descriptions are not treated as verified facts. No rating, public-access, free-entry or opening-hours schema is published.

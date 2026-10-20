@@ -7,6 +7,9 @@
   },
   "assets": {
     "directory": "dist/public",
-    "not_found_handling": "single-page-application"
-  }
+    "not_found_handling": "404-page",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  },
+  "main": "server/worker.ts"
 }
