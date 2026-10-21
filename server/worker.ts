@@ -1,1 +1,28 @@
-interface Env{ASSETS:{fetch:(request:Request)=>Promise<Response>}}export default{async fetch(request:Request,env:Env){const u=new URL(request.url);if((u.hostname==="monumenhi.com"||u.hostname==="www.monumenhi.com")&&(u.protocol!=="https:"||u.hostname!=="monumenhi.com")){u.protocol="https:";u.hostname="monumenhi.com";u.port="";return Response.redirect(u.toString(),301)}const r=await env.ASSETS.fetch(request);if(r.status!==404)return r;const h=new Headers(r.headers);h.set("X-Robots-Tag","noindex, follow");return new Response(r.body,{status:404,headers:h})}};
+interface Env {
+  ASSETS: { fetch: (request: Request) => Promise<Response> };
+}
+
+const errorPaths = new Set(["/404", "/404/", "/404.html", "/404.html/"]);
+
+export default {
+  async fetch(request: Request, env: Env) {
+    const url = new URL(request.url);
+    if ((url.hostname === "monumenhi.com" || url.hostname === "www.monumenhi.com") &&
+        (url.protocol !== "https:" || url.hostname !== "monumenhi.com")) {
+      url.protocol = "https:";
+      url.hostname = "monumenhi.com";
+      url.port = "";
+      return Response.redirect(url.toString(), 301);
+    }
+
+    const explicitError = errorPaths.has(url.pathname);
+    // The asset service redirects /404.html to /404, whose body is the error page.
+    if (explicitError) url.pathname = "/404";
+    const response = await env.ASSETS.fetch(explicitError ? new Request(url, request) : request);
+    if (!explicitError && response.status !== 404) return response;
+    const headers = new Headers(response.headers);
+    headers.delete("Location");
+    headers.set("X-Robots-Tag", "noindex, follow");
+    return new Response(request.method === "HEAD" ? null : response.body, { status: 404, headers });
+  },
+};

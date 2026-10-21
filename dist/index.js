@@ -9,6 +9,10 @@ async function startServer() {
   const app = express();
   const server = createServer(app);
   const staticPath = process.env.NODE_ENV === "production" ? path.resolve(__dirname, "public") : path.resolve(__dirname, "..", "dist", "public");
+  app.use((req, res, next) => {
+    if (!["/404", "/404/", "/404.html", "/404.html/"].includes(req.path)) return next();
+    res.status(404).set("X-Robots-Tag", "noindex, follow").sendFile(path.join(staticPath, "404.html"));
+  });
   app.use(express.static(staticPath));
   app.use((_req, res) => {
     res.status(404).set("X-Robots-Tag", "noindex, follow").sendFile(path.join(staticPath, "404.html"));

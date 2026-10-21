@@ -223,12 +223,12 @@ export const copy={
     "privacy": {
       "eyebrow": "Panduan informasi independen",
       "title": "Kebijakan Privasi",
-      "updated": "Terakhir diperbarui: 19 Oktober 2026",
+      "updated": "Terakhir diperbarui: 21 Oktober 2026",
       "intro": "Kami menghormati privasi Anda. Halaman ini menerangkan pendekatan kami terhadap data ketika Anda menggunakan Panduan Monumen Selamat Datang.",
       "sections": [
         [
           "Informasi dan fitur aktual",
-          "Tidak ada akun, pemesanan, formulir kontak atau alamat email penerimaan kiriman. Penyedia hosting dapat memproses data permintaan dasar seperti IP, peramban dan halaman sesuai kebijakannya."
+          "Tidak ada akun, pemesanan, formulir kontak atau alamat email penerimaan kiriman. Penyedia hosting dapat memproses data permintaan dasar seperti IP, peramban dan halaman sesuai kebijakannya. Hosting juga dapat menyisipkan Cloudflare Web Analytics secara mandiri untuk mengukur kinerja halaman dan waktu pemuatan. Ini terpisah dari Google Analytics dan pilihan persetujuannya."
         ],
         [
           "Pilihan lokal",
@@ -240,7 +240,7 @@ export const copy={
         ],
         [
           "Kontrol Anda",
-          "Ubah atau cabut persetujuan melalui Pengaturan Cookie. Pencabutan memuat ulang halaman bila analitik sudah aktif. Penyimpanan lokal dan Cookie pihak ketiga yang ada dapat dihapus melalui peramban."
+          "Ubah atau cabut persetujuan Google Analytics melalui Pengaturan Cookie. Menolak Google Analytics tidak menonaktifkan semua analitik hosting, termasuk Cloudflare Web Analytics yang disisipkan oleh hosting. Pencabutan memuat ulang halaman bila Google Analytics sudah aktif. Penyimpanan lokal dan Cookie pihak ketiga yang ada dapat dihapus melalui peramban."
         ]
       ]
     },
@@ -271,18 +271,18 @@ export const copy={
     "cookies": {
       "eyebrow": "Pilihan perangkat Anda",
       "title": "Pengaturan Cookie",
-      "updated": "Terakhir diperbarui: 19 Oktober 2026",
+      "updated": "Terakhir diperbarui: 21 Oktober 2026",
       "intro": "Atur bagaimana perangkat ini menyimpan preferensi. Pilihan hanya berlaku di peramban dan perangkat yang sedang digunakan.",
       "essential": "Penyimpanan persetujuan",
       "essentialText": "Menyimpan pilihan persetujuan di peramban ini. Bahasa mengikuti URL halaman.",
-      "analytics": "Cookie analitik",
-      "analyticsText": "Membantu memahami penggunaan secara agregat. Google Analytics hanya diaktifkan setelah Anda memberikan persetujuan.",
+      "analytics": "Google Analytics",
+      "analyticsText": "Google Analytics membantu memahami penggunaan secara agregat dan hanya diaktifkan setelah persetujuan Anda. Pilihan ini hanya mengontrol Google Analytics. Hosting dapat menyisipkan Cloudflare Web Analytics secara mandiri untuk kinerja halaman dan waktu pemuatan; menolak Google Analytics tidak menonaktifkan semua analitik hosting.",
       "preference": "Daftar perjalanan tersimpan",
       "preferenceText": "Mengizinkan penyimpanan daftar antarkunjungan. Bila dinonaktifkan, daftar tetap dapat digunakan sementara pada halaman.",
       "marketing": "Cookie pemasaran",
       "marketingText": "Tidak digunakan oleh panduan ini.",
       "save": "Simpan preferensi",
-      "reject": "Tolak analitik",
+      "reject": "Tolak Google Analytics",
       "saved": "Preferensi Anda tersimpan pada perangkat ini."
     }
   },
@@ -509,12 +509,12 @@ export const copy={
     "privacy": {
       "eyebrow": "Independent information guide",
       "title": "Privacy Policy",
-      "updated": "Last updated: 19 October 2026",
+      "updated": "Last updated: 21 October 2026",
       "intro": "We respect your privacy. This page explains our approach to data when you use the Monumen Selamat Datang Guide.",
       "sections": [
         [
           "Information and actual features",
-          "There are no accounts, bookings, contact forms or email submission channels. Technical hosting providers may process basic request data such as IP address, browser and requested pages under their own policies."
+          "There are no accounts, bookings, contact forms or email submission channels. Technical hosting providers may process basic request data such as IP address, browser and requested pages under their own policies. Hosting may also independently inject Cloudflare Web Analytics to measure page performance and load timing. This is separate from Google Analytics and its consent choice."
         ],
         [
           "Local choices",
@@ -526,7 +526,7 @@ export const copy={
         ],
         [
           "Your controls",
-          "Use Cookie Settings to change or withdraw consent. Withdrawal reloads the page if analytics is already active. Browser settings can clear existing local storage and third-party cookies."
+          "Use Cookie Settings to change or withdraw Google Analytics consent. Rejecting Google Analytics does not disable all hosting analytics, including hosting-injected Cloudflare Web Analytics. Withdrawal reloads the page if Google Analytics is already active. Browser settings can clear existing local storage and third-party cookies."
         ]
       ]
     },
@@ -557,18 +557,18 @@ export const copy={
     "cookies": {
       "eyebrow": "Your device choices",
       "title": "Cookie Settings",
-      "updated": "Last updated: 19 October 2026",
+      "updated": "Last updated: 21 October 2026",
       "intro": "Set how this device stores preferences. Choices apply only in the browser and device you are using.",
       "essential": "Consent storage",
       "essentialText": "Retains the consent choice on this browser. Language follows the page URL.",
-      "analytics": "Analytics cookies",
-      "analyticsText": "Help us understand aggregate use. Google Analytics is enabled only after you give consent.",
+      "analytics": "Google Analytics",
+      "analyticsText": "Google Analytics helps us understand aggregate use and is enabled only after you give consent. This choice controls Google Analytics only. Hosting may independently inject Cloudflare Web Analytics for page performance and load timing; rejecting Google Analytics does not disable all hosting analytics.",
       "preference": "Saved field list",
       "preferenceText": "Allows this browser to retain your field list across visits. Disabling stops persistent list use; a temporary list still works on the page.",
       "marketing": "Marketing cookies",
       "marketingText": "Not used by this guide.",
       "save": "Save preferences",
-      "reject": "Reject analytics",
+      "reject": "Reject Google Analytics",
       "saved": "Your preferences are stored on this device."
     }
   }
