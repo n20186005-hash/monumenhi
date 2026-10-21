@@ -240,7 +240,7 @@ export const copy={
         ],
         [
           "Kontrol Anda",
-          "Ubah atau cabut persetujuan Google Analytics melalui Pengaturan Cookie. Menolak Google Analytics tidak menonaktifkan semua analitik hosting, termasuk Cloudflare Web Analytics yang disisipkan oleh hosting. Pencabutan memuat ulang halaman bila Google Analytics sudah aktif. Penyimpanan lokal dan Cookie pihak ketiga yang ada dapat dihapus melalui peramban."
+          "Ubah atau cabut persetujuan Google Analytics melalui Pengaturan Cookie. Menolak Google Analytics tidak menonaktifkan semua analitik hosting, termasuk Cloudflare Web Analytics yang disisipkan oleh hosting. Pencabutan langsung menonaktifkan Google Analytics tanpa memuat ulang. Jika penyimpanan gagal, pesan pengaturan menjelaskan apakah penolakan berlaku hanya pada halaman yang sedang dibuka atau juga saat memuat ulang tab ini; tab dan peramban lain dapat memakai pilihan lama. Penyimpanan lokal dan Cookie pihak ketiga yang ada dapat dihapus melalui peramban."
         ]
       ]
     },
@@ -526,7 +526,7 @@ export const copy={
         ],
         [
           "Your controls",
-          "Use Cookie Settings to change or withdraw Google Analytics consent. Rejecting Google Analytics does not disable all hosting analytics, including hosting-injected Cloudflare Web Analytics. Withdrawal reloads the page if Google Analytics is already active. Browser settings can clear existing local storage and third-party cookies."
+          "Use Cookie Settings to change or withdraw Google Analytics consent. Rejecting Google Analytics does not disable all hosting analytics, including hosting-injected Cloudflare Web Analytics. Withdrawal immediately disables Google Analytics without reloading. If storage fails, the settings message explains whether denial lasts only on the loaded page or also across reloads in this tab; other tabs and browsers may use the old choice. Browser settings can clear existing local storage and third-party cookies."
         ]
       ]
     },

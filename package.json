@@ -11,6 +11,7 @@
     "deploy": "pnpm run build && wrangler deploy",
     "cf-preview": "pnpm run build && wrangler dev",
     "check": "tsc --noEmit",
+    "test:consent": "node tests/consent.mjs",
     "format": "prettier --write ."
   },
   "dependencies": {
