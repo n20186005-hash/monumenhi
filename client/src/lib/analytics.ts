@@ -22,14 +22,24 @@ export function saveConsent(value: Consent): ConsentResult {
     try { sessionStorage.setItem(VETO_KEY, "1"); tabVeto = true; } catch {}
   }
   let saved = false;
-  try {
-    localStorage.setItem("msd-consent", JSON.stringify({ ...value, updated: "2026-10-21" }));
-    saved = true;
-  } catch {}
-  if (value.analytics && saved) {
-    // Clear the old veto before announcing a grant; a failed removal stays denied.
-    try { sessionStorage.removeItem(VETO_KEY); documentVeto = false; }
-    catch { if (hasVeto()) saved = false; }
+  const previousVeto = hasVeto();
+  let canSave = true;
+  if (value.analytics) {
+    // Do not publish a shared grant while this tab cannot clear its denial.
+    try { sessionStorage.removeItem(VETO_KEY); }
+    catch { canSave = !previousVeto; }
+  }
+  if (canSave) {
+    try {
+      localStorage.setItem("msd-consent", JSON.stringify({ ...value, updated: "2026-10-21" }));
+      saved = true;
+    } catch {}
+  }
+  if (value.analytics && saved) documentVeto = false;
+  else if (value.analytics && previousVeto) {
+    // A failed local grant must also retain denial across this tab's reloads.
+    documentVeto = true;
+    try { sessionStorage.setItem(VETO_KEY, "1"); } catch {}
   }
   if (!value.preferences) { try { localStorage.removeItem("msd-itinerary"); } catch {} }
   const effective = readConsent();

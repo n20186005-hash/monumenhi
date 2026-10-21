@@ -56,6 +56,14 @@ for (const sessionFails of [false, true]) {
  const p=page(oldGrant());p.deny();p.failures.sessionWrite=true;
  const result=p.grant();assert.equal(result.saved,false);assert.equal(result.analytics,false);assert.equal(result.scope,'tab');
  assert.equal(p.enabled(),false);assert.equal(p.state.updates.at(-1)[2].analytics_storage,'denied');
+ const otherTab=page(p.local,new Map());assert.equal(otherTab.enabled(),false);assert.equal(otherTab.state.loads,0);
+ assert.equal(JSON.parse(p.local.get('msd-consent')).analytics,false);
+}
+// Clearing the session veto first must not lose denial when the local grant then fails.
+{
+ const p=page(oldGrant(),new Map(),{localWrite:true});p.deny();
+ const result=p.grant();assert.equal(result.saved,false);assert.equal(result.analytics,false);assert.equal(result.scope,'tab');
+ const refreshed=page(p.local,p.session,p.failures);assert.equal(refreshed.enabled(),false);assert.equal(refreshed.state.loads,0);
 }
 // Default denial, malformed consent, unavailable reads, and preference gates.
 {
