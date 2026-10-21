@@ -5,7 +5,7 @@ export type Consent = { analytics: boolean; preferences: boolean };
 export type ConsentResult = { saved: boolean; scope: "saved" | "tab" | "page"; analytics: boolean };
 function hasVeto() {
   if (documentVeto) return true;
-  try { return sessionStorage.getItem(VETO_KEY) === "1"; } catch { return false; }
+  try { return sessionStorage.getItem(VETO_KEY) === "1"; } catch { return true; }
 }
 export function readConsent(): Consent {
   try {
@@ -26,8 +26,10 @@ export function saveConsent(value: Consent): ConsentResult {
   let canSave = true;
   if (value.analytics) {
     // Do not publish a shared grant while this tab cannot clear its denial.
-    try { sessionStorage.removeItem(VETO_KEY); }
-    catch { canSave = !previousVeto; }
+    try {
+      sessionStorage.removeItem(VETO_KEY);
+      canSave = sessionStorage.getItem(VETO_KEY) !== "1";
+    } catch { canSave = false; }
   }
   if (canSave) {
     try {
@@ -48,6 +50,28 @@ export function saveConsent(value: Consent): ConsentResult {
   if (value.analytics && !effective.analytics) saved = false;
   try { tabVeto = sessionStorage.getItem(VETO_KEY) === "1"; } catch {}
   return { saved, scope: saved ? "saved" : tabVeto ? "tab" : "page", analytics: effective.analytics };
+}
+// Subscribe at both runtime and controls boundaries; storage events originate in other tabs.
+export function subscribeConsent(listener: (value: Consent, source: "initial" | "local" | "storage") => void) {
+  const refresh = () => listener(readConsent(), "local");
+  const storage = (event: StorageEvent) => {
+    if ((event.key !== "msd-consent" && event.key !== null) ||
+        (event.storageArea && event.storageArea !== localStorage)) return;
+    const value = readConsent();
+    if (!value.analytics) {
+      documentVeto = true;
+      applyAnalyticsConsent(false);
+      try { sessionStorage.setItem(VETO_KEY, "1"); } catch {}
+    }
+    listener(readConsent(), "storage");
+  };
+  window.addEventListener("msd-analytics-change", refresh);
+  window.addEventListener("storage", storage);
+  listener(readConsent(), "initial");
+  return () => {
+    window.removeEventListener("msd-analytics-change", refresh);
+    window.removeEventListener("storage", storage);
+  };
 }
 export function readItinerary() { try { if (!readConsent().preferences) return []; const v = JSON.parse(localStorage.getItem("msd-itinerary") || "[]"); return Array.isArray(v) ? v.filter((id): id is string => typeof id === "string") : []; } catch { return []; } }
 export function saveItinerary(value: string[]) { try { if (!readConsent().preferences) return "temporary"; localStorage.setItem("msd-itinerary", JSON.stringify(value)); return "saved"; } catch { return "failed"; } }

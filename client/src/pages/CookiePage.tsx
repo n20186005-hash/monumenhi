@@ -6,7 +6,7 @@ import { ArrowLeft, Check } from "lucide-react";
 import { useEffect, useState } from "react";
 import SiteShell, { useLanguage } from "@/components/SiteShell";
 import { languagePath } from "@/const";
-import {readConsent,saveConsent,type ConsentResult} from "@/lib/analytics";
+import {readConsent,saveConsent,subscribeConsent,type ConsentResult} from "@/lib/analytics";
 
 export default function CookiePage() {
   const { lang, t } = useLanguage();
@@ -14,7 +14,8 @@ export default function CookiePage() {
   const [preferences, setPreferences] = useState(false);
   const [result,setResult]=useState<ConsentResult|null>(null);
   const [saved, setSaved] = useState(false);
-  useEffect(()=>{const v=readConsent();setAnalytics(v.analytics);setPreferences(v.preferences)},[]);
+  const [external,setExternal]=useState(false);
+  useEffect(()=>subscribeConsent((v,source)=>{setExternal(source==="storage");setAnalytics(v.analytics);setPreferences(v.preferences);setResult(null);setSaved(false)}),[]);
   const persist=(analyticsValue=analytics,preferencesValue=preferences)=>{const next=saveConsent({analytics:analyticsValue,preferences:preferencesValue});setResult(next);setSaved(next.saved);setAnalytics(next.analytics);setPreferences(readConsent().preferences)};
   return <SiteShell compact page="cookies">
     <main className="policy-page cookie-page"><div className="policy-rail" aria-hidden="true"><span>CONTROL · LOCAL</span></div><article className="policy-content">
@@ -31,6 +32,9 @@ export default function CookiePage() {
         : result.scope==="tab"
           ? (lang==="id"?"Pilihan tidak tersimpan untuk kunjungan berikutnya. Google Analytics dinonaktifkan di tab ini, termasuk saat memuat ulang; tab atau peramban lain dapat memakai pilihan lama.":"Choices were not saved for future visits. Google Analytics is off in this tab, including reloads; other tabs or browsers may use the old choice.")
           : (lang==="id"?"Pilihan tidak tersimpan. Google Analytics dinonaktifkan hanya pada halaman ini; memuat ulang, berpindah halaman, atau membuka tab lain dapat memakai pilihan lama.":"Choices were not saved. Google Analytics is off only on this loaded page; reloading, navigating, or opening another tab may use the old choice.")}</p>}
+      {external&&<p role="status">{lang==="id"
+        ? `Pilihan berubah di tab lain. Google Analytics ${analytics?"aktif":"nonaktif"} di halaman ini.`
+        : `Choices changed in another tab. Google Analytics is ${analytics?"on":"off"} on this page.`}</p>}
       {saved && <p className="save-confirm"><Check size={16} /> {t.cookies.saved}</p>}
     </article></main>
   </SiteShell>;
