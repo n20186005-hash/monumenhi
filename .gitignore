@@ -1,8 +1,29 @@
+# Dependencies
 node_modules/
+
+# Build output (Vite + esbuild prerender)
 dist/
+
+# Cloudflare
 .wrangler/
+.dev.vars
+
+# Environment / secrets
 .env
 .env.*
+
+# Logs
 *.log
+
+# OS / editor
 .DS_Store
+Thumbs.db
+*.swp
+
+# Local temp / scratch
+*.tmp
+.tmp/
+scratch/
+
+# Manus artifacts
 client/public/__manus__/
