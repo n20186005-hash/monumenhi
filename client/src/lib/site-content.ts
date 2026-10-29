@@ -13,6 +13,12 @@ export const copy={
     "heroLead": "Monumen Selamat Datang berdiri di Bundaran HI—sebuah penanda modernitas Jakarta sejak Asian Games IV 1962. Panduan ini membantu Anda membaca tempatnya, bukan sekadar melewatinya.",
     "heroPrimary": "Rencanakan kunjungan",
     "heroSecondary": "Baca ceritanya",
+    "quickLabel": "Tiga jawaban cepat",
+    "quickItems": [
+      ["Apa ini?","Monumen Selamat Datang, juga disebut Welcome Monument, berada di Bundaran HI—penanda modernitas Jakarta sejak Asian Games IV 1962."],
+      ["Di mana melihat?","Dari area pedestrian di sekitar bundaran. Pin lokasi membantu orientasi, bukan pintu masuk ke dasar patung."],
+      ["Bagaimana mengatur?","Datang ke kawasan Bundaran HI, lalu pilih makan, belanja, atau rute sejarah sesuai waktu dan minat Anda."]
+    ],
     "sourceNote": "Panduan informasi independen · Bukan situs resmi",
     "factYear": "1962",
     "factYearLabel": "tahun karya — Galeri Nasional",
@@ -299,6 +305,12 @@ export const copy={
     "heroLead": "Monumen Selamat Datang stands at Bundaran HI—a marker of Jakarta’s modernity since the 1962 Asian Games. This guide helps you read the place, rather than simply pass through it.",
     "heroPrimary": "Plan a visit",
     "heroSecondary": "Read the story",
+    "quickLabel": "Three quick answers",
+    "quickItems": [
+      ["What is it?","The Selamat Datang Monument, also called the Welcome Monument, stands at Bundaran HI—a marker of Jakarta’s modernity since the 1962 Asian Games."],
+      ["Where to view it?","From the pedestrian areas around the roundabout. The location pin aids orientation, not a visitor entrance to the statue base."],
+      ["How to plan?","Come to the Bundaran HI district, then choose dining, shopping, or a history route that fits your time and interests."]
+    ],
     "sourceNote": "Independent information guide · Not an official website",
     "factYear": "1962",
     "factYearLabel": "work dated by National Gallery",
